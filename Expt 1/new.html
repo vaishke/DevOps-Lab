@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="registration1.css">
+</head>
+<body>
+    <div class="Heading">
+        <center><h1>Register</h1></center>
+    </div>
+    <form class="userDetails" id="registrationForm" onsubmit="validateForm(event)">
+        <label class="firstName">First Name: </label>
+        <input class="firstNameInput" type="text" id="firstName" required>
+        <p></p>
+
+        <label class="lastName">Last Name: </label>
+        <input class="lastNameInput" type="text" id="lastName" required>
+        <p></p>
+
+        <label class="gender">Gender: </label>
+        <select id="genders" name="genders" required>
+            <option value="None">None</option>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Others">Others</option>
+        </select>
+        <p></p>
+
+        <label class="course">Branch: </label>
+        <select id="courses" name="courses" required>
+            <option value="None">None</option>
+            <option value="CSE">CSE</option>
+            <option value="CSE (AIML)">CSE (AIML)</option>
+            <option value="IT">IT</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+        </select>
+        <p></p>
+
+        <label class="userName">UserName: </label>
+        <input class="userNameInput" type="text" id="userName" required>
+        <p></p>
+
+        <label class="password">Password: </label>
+        <input class="passwordInput" type="password" id="password" required>
+        <p></p>
+
+        <label class="confirmPassword">Confirm Password: </label>
+        <input class="confirmPasswordInput" type="password" id="confirmPassword" required>
+        <p></p>
+
+        <label class="state">State: </label>
+        <input class="stateInput" type="text" id="state" required>
+        <p></p>
+
+        <label class="country">Country: </label>
+        <input class="countryInput" type="text" id="country" required>
+        <p></p>
+
+        <label class="dob">Date of Birth: </label>
+        <input class="dobInput" type="date" id="dob" required>
+        <p></p>
+        <center>
+        <button class="reset" type="reset" onclick="resetForm()">Reset</button>
+        <button class="submit" type="submit">Submit</button>
+        </center>
+    </form>
+    <p></p>
+    
+    <p></p>
+
+    <script>
+        // Function to validate form
+    function validateForm(event) {
+        event.preventDefault();
+
+        var firstName = document.getElementById('firstName').value.trim();
+        var lastName = document.getElementById('lastName').value.trim();
+        var gender = document.getElementById('genders').value;
+        var branch = document.getElementById('courses').value;
+        var userName = document.getElementById('userName').value.trim();
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+        var state = document.getElementById('state').value.trim();
+        var country = document.getElementById('country').value.trim();
+        var dob = document.getElementById('dob').value;
+
+        var namePattern = /^[A-Za-z]+$/;
+        if (!namePattern.test(firstName)) {
+            alert("First name should only contain alphabets.");
+            return;
+        }
+        if (!namePattern.test(lastName)) {
+            alert("Last name should only contain alphabets.");
+            return;
+        }
+
+        var usernamePattern = /^[A-Za-z0-9_]{5,}$/;
+        if (!usernamePattern.test(userName)) {
+            alert("Username must be at least 5 characters and contain only alphabets, numbers, and underscores.");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Password and Confirm Password must match.");
+            return;
+        }
+
+        var age = calculateAge(dob);
+        if (age < 18) {
+            alert("You must be at least 18 years old to register.");
+            return;
+        }
+
+        // Store values in localStorage
+        localStorage.setItem('formData', JSON.stringify({
+            firstName,
+            lastName,
+            gender,
+            branch,
+            userName,
+            state,
+            country,
+            dob,
+            age
+        }));
+
+        // Redirect to details.html
+        window.location.href = "details.html";
+    }
+
+        // Function to calculate age from the date of birth
+        function calculateAge(dob) {
+            var birthDate = new Date(dob);
+            var currentDate = new Date();
+            var age = currentDate.getFullYear() - birthDate.getFullYear();
+            var month = currentDate.getMonth() - birthDate.getMonth();
+            if (month < 0 || (month === 0 && currentDate.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        // Reset form function
+        function resetForm() {
+            document.getElementById("registrationForm").reset();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        .info-box {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+        }
+        p {
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-box">
+        <h2>Submitted Registration Details</h2>
+        <p id="details"></p>
+    </div>
+
+    <script>
+        const data = JSON.parse(localStorage.getItem('formData'));
+        if (data) {
+            const details = `
+                <strong>First Name:</strong> ${data.firstName}<br>
+                <strong>Last Name:</strong> ${data.lastName}<br>
+                <strong>Gender:</strong> ${data.gender}<br>
+                <strong>Branch:</strong> ${data.branch}<br>
+                <strong>Username:</strong> ${data.userName}<br>
+                <strong>State:</strong> ${data.state}<br>
+                <strong>Country:</strong> ${data.country}<br>
+                <strong>Date of Birth:</strong> ${data.dob}<br>
+                <strong>Age:</strong> ${data.age}
+            `;
+            document.getElementById("details").innerHTML = details;
+        } else {
+            document.getElementById("details").innerText = "No registration data found.";
+        }
+        localStorage.removeItem('formData');
+    </script>
+</body>
+</html>

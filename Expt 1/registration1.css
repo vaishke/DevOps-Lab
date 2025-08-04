@@ -1,0 +1,71 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+}
+
+.Heading {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    color: white;
+}
+
+.userDetails {
+    margin: 0 auto;
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px 100px;
+    border-radius: 10px;
+    border: 2px solid white;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+/* Green border for valid fields */
+input.valid, select.valid {
+    border-color: green;
+}
+
+/* Red border for invalid fields */
+input.invalid, select.invalid {
+    border-color: red;
+}
+
+button {
+    background-color: dodgerblue;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 15px 10px;
+    min-width: 100px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: deepskyblue;
+}
+
+.center {
+    text-align: center;
+}
